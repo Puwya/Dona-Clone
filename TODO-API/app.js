@@ -1,38 +1,26 @@
-
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
 // Create our express app
 const app = express();
+const port = process.env.PORT || 3000;
+const uri = process.env.URI;
 
 // Handle CORS + Middleware
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
-  res.header('Access-Control-Allow-Headers', 'auth-token, Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const uri = 'mongodb+srv://root:Wastedyouth1@mevn-example-cluster.md3oh.mongodb.net/?retryWrites=true&w=majority';
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log('Mongodb Connected');
-}).catch(err => console.log(err));
-
-app.use(bodyParser.json());
-
-// Routes
-app.get('/', (res, req) => {
-  res.send('Home Page');
-});
-
-const TodosRoute = require('./routes/Todos');
-app.use('/todos', TodosRoute);
-
-// Start Server
-app.listen(3000, () => {
-  console.log('Listening at port 3000');
-});
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    console.log("Mongodb Connected");
+  })
+  .catch((err) => console.log(err));
