@@ -1,13 +1,36 @@
 <template>
   <div>
     <div class="d-grid mt-4">
+      <button class="row btn btn-light btn-lg m-1 ps-1 p-3 fs-6" type="button">
+        <div class="d-flex">
+          <span>^</span>
+          <div class="d-flex col-10 ms-3">Home</div>
+          <div class="d-flex col-2" v-text="GetTaskTotal"></div>
+        </div>
+      </button>
       <button
         v-for="TodoList in TodoLists"
         :key="TodoList.name"
-        class="row btn btn-light btn-lg m-1"
+        class="d-flex row btn btn-light btn-sm m-1 ps-1 p-3 fs-6"
         type="button"
       >
-        {{ TodoList.name }}
+        <div class="d-flex col-10">
+          <span class="me-2">
+            {{ TodoList.icon }}
+          </span>
+          <span class="ms-2">
+            {{ TodoList.name }}
+          </span>
+        </div>
+        <div class="d-flex col-2 justify-content-end">
+          {{ TodoList.size }}
+        </div>
+      </button>
+      <button class="row btn btn-light btn-lg m-1 ps-1 p-3 fs-6" type="button">
+        <div class="d-flex">
+          <span>+</span>
+          <div class="d-flex ms-3">Create new list</div>
+        </div>
       </button>
     </div>
   </div>
@@ -42,10 +65,19 @@ export default {
         {
           name: 'Shopping',
           icon: '!',
-          size: 1,
+          size: 2,
         },
       ],
     };
+  },
+  computed: {
+    GetTaskTotal() {
+      let sum = 0;
+      this.TodoLists.forEach((TodoList) => {
+        sum += TodoList.size;
+      });
+      return sum;
+    },
   },
 };
 </script>
