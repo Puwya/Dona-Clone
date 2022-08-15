@@ -13,3 +13,9 @@ export default {
   },
 };
 </script>
+
+<style>
+body {
+  background-color: steelblue;
+}
+</style>
