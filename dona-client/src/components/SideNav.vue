@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="d-grid mt-4">
-      <button class="row btn btn-light btn-lg m-1 ps-1 p-3 fs-6" type="button">
+    <div class="d-grid mt-4 ps-3 pe-3">
+      <button class="row btn btn-light m-1 ps-1 p-3 fs-6 rounded-4" type="button">
         <div class="d-flex">
           <span>^</span>
           <div class="d-flex col-10 ms-3">Home</div>
@@ -11,7 +11,7 @@
       <button
         v-for="TodoList in TodoLists"
         :key="TodoList.name"
-        class="d-flex row btn btn-light btn-sm m-1 ps-1 p-3 fs-6"
+        class="d-flex row btn btn-light m-1 ps-1 p-3 fs-6 rounded-4"
         type="button"
       >
         <div class="d-flex col-10">
@@ -26,7 +26,7 @@
           {{ TodoList.size }}
         </div>
       </button>
-      <button class="row btn btn-light btn-lg m-1 ps-1 p-3 fs-6" type="button">
+      <button class="row btn btn-light m-1 ps-1 p-3 fs-6 rounded-4" type="button">
         <div class="d-flex">
           <span>+</span>
           <div class="d-flex ms-3">Create new list</div>
